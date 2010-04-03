@@ -1,13 +1,13 @@
 /*
- * HyperQube.cpp
+ * HyperCube.cpp
  *
  *  Created on: 01.04.2010
  *      Author: r2p2
  */
 
-#include "HyperQube.h"
+#include "HyperCube.h"
 
-HyperQube::HyperQube()
+HyperCube::HyperCube()
 {
 	Point *points[8];
 	points[0] = new Point(-0.9, -0.9, +0.9);
@@ -38,7 +38,7 @@ HyperQube::HyperQube()
 	}
 }
 
-HyperQube::~HyperQube()
+HyperCube::~HyperCube()
 {
 	for(int i = 0; i < 12; i++)
 	{
@@ -46,7 +46,7 @@ HyperQube::~HyperQube()
 	}
 }
 
-void HyperQube::rotate_y(double angle)
+void HyperCube::rotate_y(double angle)
 {
 	for(int i = 0; i < 12; i++)
 	{
@@ -54,7 +54,7 @@ void HyperQube::rotate_y(double angle)
 	}
 }
 
-void HyperQube::rotate_x(double angle)
+void HyperCube::rotate_x(double angle)
 {
 	for(int i = 0; i < 12; i++)
 	{
@@ -62,7 +62,7 @@ void HyperQube::rotate_x(double angle)
 	}
 }
 
-void HyperQube::rotate_z(double angle)
+void HyperCube::rotate_z(double angle)
 {
 	for(int i = 0; i < 12; i++)
 	{
@@ -70,7 +70,7 @@ void HyperQube::rotate_z(double angle)
 	}
 }
 
-void HyperQube::move_(double x_delta, double y_delta, double z_delta)
+void HyperCube::move_(double x_delta, double y_delta, double z_delta)
 {
 	for(int i = 0; i < 12; i++)
 	{
@@ -78,7 +78,7 @@ void HyperQube::move_(double x_delta, double y_delta, double z_delta)
 	}
 }
 
-void HyperQube::render(char c)
+void HyperCube::render(char c)
 {
 	for(int i = 0; i < 12; i++)
 	{

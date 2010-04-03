@@ -1,23 +1,23 @@
 /*
- * HyperQube.h
+ * HyperCube.h
  *
  *  Created on: 01.04.2010
  *      Author: r2p2
  */
 
-#ifndef HYPERQUBE_H_
-#define HYPERQUBE_H_
+#ifndef HyperCube_H_
+#define HyperCube_H_
 
 #include "Line.h"
 #include "Point.h"
 
-class HyperQube
+class HyperCube
 {
 	Line *lines[12];
 
 public:
-	HyperQube();
-	virtual ~HyperQube();
+	HyperCube();
+	virtual ~HyperCube();
 
 	void rotate_x(double angle);
 	void rotate_y(double angle);
@@ -27,4 +27,4 @@ public:
 	void render(char);
 };
 
-#endif /* HYPERQUBE_H_ */
+#endif /* HyperCube_H_ */

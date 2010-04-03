@@ -9,7 +9,7 @@
 #include <unistd.h>
 #include <signal.h>
 
-#include "HyperQube.h"
+#include "HyperCube.h"
 
 bool running = true;
 
@@ -29,21 +29,21 @@ int main()
 	WINDOW *window = 0;
 	window = initscr();
 
-	HyperQube hq;
+	HyperCube hc;
 
 	while(running) {
-		hq.rotate_y(0.2);
-		hq.rotate_z(0.3);
-		hq.rotate_x(0.5);
+		hc.rotate_y(0.2);
+		hc.rotate_z(0.3);
+		hc.rotate_x(0.5);
 
-		hq.move_(0,0,-8);
+		hc.move_(0,0,-8);
 
-		hq.render('#');
+		hc.render('#');
 		refresh();
-		hq.render(' ');
+		hc.render(' ');
 		move(0,0);
 
-		hq.move_(0,0,8);
+		hc.move_(0,0,8);
 
 		usleep(20000);
 	}
