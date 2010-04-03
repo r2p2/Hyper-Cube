@@ -10,8 +10,6 @@
 #include <cmath>
 #include <curses.h>
 
-#include <iostream>
-
 Point::Point(double x, double y, double z)
 :x(x), y(y), z(z)
 {
@@ -63,14 +61,19 @@ void Point::move_(double x_delta, double y_delta, double z_delta)
 
 void Point::render(char c)
 {
+	mvaddch(screen_y(), screen_x(), c);
+}
+
+int Point::screen_x()
+{
 	double sx = (x*2)/(0.1-z);
-	double sy = (y*2)/(0.1-z);
-
 	double width =  (double)COLS;
+	return (int)(width*sx + width/2);
+}
+
+int Point::screen_y()
+{
+	double sy = (y*2)/(0.1-z);
 	double height = (double)LINES;
-
-	double rx = width*sx + width/2;
-	double ry = height*sy + height/2;
-
-	mvaddch((int)ry, (int)rx, c);
+	return (int)(height*sy + height/2);
 }

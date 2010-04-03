@@ -8,12 +8,21 @@
 #ifndef LINE_H_
 #define LINE_H_
 
+#include <vector>
+
 #include "Point.h"
+
+struct Point2d {
+	int x, y;
+};
 
 class Line
 {
+	std::vector<Point2d> cache;
+
 	Point start;
 	Point end;
+
 public:
 	Line(Point a, Point b);
 	virtual ~Line();

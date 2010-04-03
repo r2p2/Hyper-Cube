@@ -20,6 +20,8 @@ public:
 	void move_(double x_delta, double y_delta, double z_delta);
 
 	void render(char);
+	int screen_x();
+	int screen_y();
 
 	double x;
 	double y;
