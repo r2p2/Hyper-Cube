@@ -17,6 +17,10 @@ Line::Line(Point a, Point b)
 Line::~Line()
 {}
 
+int Line::sgn(int x){
+  return (x > 0) ? 1 : (x < 0) ? -1 : 0;
+}
+
 void Line::rotate_x(double angle)
 {
 	cache.clear();
@@ -53,33 +57,70 @@ void Line::render(char c)
 {
 	if(cache.empty())
 	{
+		/* nach Bresenham */
 		Point2d p = {0,0};
+
+		int x, y, t, pdx, pdy, ddx, ddy, es, el, err;
 
 		int startx = start.screen_x();
 		int starty = start.screen_y();
-		int dx = end.screen_x()-startx;
-		int dy = end.screen_y()-starty;
+		int endx = end.screen_x();
+		int endy = end.screen_y();
 
-		int rx = 0;
-		int ry = 0;
+		int dx = endx-startx;
+		int dy = endy-starty;
 
-		int abs_dx = dx>=0?dx:dx*-1;
-		int abs_dy = dy>=0?dy:dy*-1;
+		int incx = sgn(dx);
+		int incy = sgn(dy);
 
-		int steps = abs_dx>abs_dy?dx:dy;
-		if(steps<0) steps *= -1;
+		if(dx<0) dx = -dx;
+		if(dy<0) dy = -dy;
 
-		float fx = (float)dx/steps;
-		float fy = (float)dy/steps;
-
-		for(int i = 0; i <= steps; i++)
+		if (dx>dy)
 		{
-			rx = startx+fx*i;
-			ry = starty+fy*i;
-			mvaddch(ry, rx, c);
+			pdx = incx;
+			pdy = 0;
+			ddx = incx;
+			ddy = incy;
+			es = dy;
+			el = dx;
+		}
+		else
+		{
+			pdx = 0;
+			pdy = incy;
+			ddx = incx;
+			ddy = incy;
+			es = dx;
+			el = dy;
+		}
 
-			p.x = rx;
-			p.y = ry;
+		x = startx;
+		y = starty;
+		err = el/2;
+
+		mvaddch(y, x, c);
+		p.x = x;
+		p.y = y;
+		cache.push_back(p);
+
+		for(t=0; t<el; ++t)
+		{
+			err -= es;
+			if(err<0)
+			{
+				err += el;
+				x += ddx;
+				y += ddy;
+			}
+			else
+			{
+				x += pdx;
+				y += pdy;
+			}
+			mvaddch(y, x, c);
+			p.x = x;
+			p.y = y;
 			cache.push_back(p);
 		}
 	}

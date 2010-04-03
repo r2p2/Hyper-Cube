@@ -23,6 +23,8 @@ class Line
 	Point start;
 	Point end;
 
+	int sgn(int);
+
 public:
 	Line(Point a, Point b);
 	virtual ~Line();
