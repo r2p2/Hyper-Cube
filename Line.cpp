@@ -8,11 +8,7 @@
 #include <curses.h>
 #include <cmath>
 
-
 #include "Line.h"
-
-#include <iostream>
-#include <fstream>
 
 Line::Line(Point a, Point b)
 :start(a), end(b)
