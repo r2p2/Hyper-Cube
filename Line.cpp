@@ -53,7 +53,7 @@ void Line::move_(double x_delta, double y_delta, double z_delta)
 	end.move_(x_delta, y_delta, z_delta);
 }
 
-void Line::render(char c)
+void Line::render(Screen &s, char c)
 {
 	if(cache.empty())
 	{
@@ -62,10 +62,10 @@ void Line::render(char c)
 
 		int x, y, t, pdx, pdy, ddx, ddy, es, el, err;
 
-		int startx = start.screen_x();
-		int starty = start.screen_y();
-		int endx = end.screen_x();
-		int endy = end.screen_y();
+		int startx = start.screen_x(s);
+		int starty = start.screen_y(s);
+		int endx = end.screen_x(s);
+		int endy = end.screen_y(s);
 
 		int dx = endx-startx;
 		int dy = endy-starty;
@@ -99,7 +99,8 @@ void Line::render(char c)
 		y = starty;
 		err = el/2;
 
-		mvaddch(y, x, c);
+		s.canvas[y][x] = c;
+		//mvaddch(y, x, c);
 		p.x = x;
 		p.y = y;
 		cache.push_back(p);
@@ -118,7 +119,9 @@ void Line::render(char c)
 				x += pdx;
 				y += pdy;
 			}
-			mvaddch(y, x, c);
+
+			s.canvas[y][x] = c;
+			//mvaddch(y, x, c);
 			p.x = x;
 			p.y = y;
 			cache.push_back(p);
@@ -128,7 +131,8 @@ void Line::render(char c)
 	{
 		for(unsigned int i=0; i<cache.size(); i++)
 		{
-			mvaddch(cache[i].y, cache[i].x, c);
+			s.canvas[cache[i].y][cache[i].x] = c;
+			//mvaddch(cache[i].y, cache[i].x, c);
 		}
 	}
 }

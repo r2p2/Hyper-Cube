@@ -8,6 +8,7 @@
 #ifndef HyperCube_H_
 #define HyperCube_H_
 
+#include "Screen.h"
 #include "Line.h"
 #include "Point.h"
 
@@ -24,7 +25,7 @@ public:
 	void rotate_z(double angle);
 	void move_(double x_delta, double y_delta, double z_delta);
 
-	void render(char);
+	void render(Screen &s, char c);
 };
 
 #endif /* HyperCube_H_ */

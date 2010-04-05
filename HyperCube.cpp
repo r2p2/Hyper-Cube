@@ -78,10 +78,10 @@ void HyperCube::move_(double x_delta, double y_delta, double z_delta)
 	}
 }
 
-void HyperCube::render(char c)
+void HyperCube::render(Screen &s, char c)
 {
 	for(int i = 0; i < 12; i++)
 	{
-		lines[i]->render(c);
+		lines[i]->render(s, c);
 	}
 }

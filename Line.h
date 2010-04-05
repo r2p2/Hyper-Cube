@@ -10,6 +10,7 @@
 
 #include <vector>
 
+#include "Screen.h"
 #include "Point.h"
 
 struct Point2d {
@@ -34,7 +35,7 @@ public:
 	void rotate_z(double angle);
 	void move_(double x_delta, double y_delta, double z_delta);
 
-	void render(char);
+	void render(Screen &s, char c);
 };
 
 #endif /* LINE_H_ */

@@ -8,6 +8,8 @@
 #ifndef POINT_H_
 #define POINT_H_
 
+#include "Screen.h"
+
 class Point
 {
 public:
@@ -19,9 +21,9 @@ public:
 	void rotate_z(double angle);
 	void move_(double x_delta, double y_delta, double z_delta);
 
-	void render(char);
-	int screen_x();
-	int screen_y();
+	void render(Screen &s, char c);
+	int screen_x(Screen &s);
+	int screen_y(Screen &s);
 
 	double x;
 	double y;

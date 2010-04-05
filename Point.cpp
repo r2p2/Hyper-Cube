@@ -59,21 +59,22 @@ void Point::move_(double x_delta, double y_delta, double z_delta)
 	z += z_delta;
 }
 
-void Point::render(char c)
+void Point::render(Screen &s, char c)
 {
-	mvaddch(screen_y(), screen_x(), c);
+	s.canvas[screen_y(s)][screen_x(s)] = c;
+	//mvaddch(screen_y(s), , c);
 }
 
-int Point::screen_x()
+int Point::screen_x(Screen &s)
 {
 	double sx = (x*2)/(0.1-z);
-	double width =  (double)COLS;
+	double width = (double)s.width;
 	return (int)(width*sx + width/2);
 }
 
-int Point::screen_y()
+int Point::screen_y(Screen &s)
 {
 	double sy = (y*2)/(0.1-z);
-	double height = (double)LINES;
+	double height = (double)s.height;
 	return (int)(height*sy + height/2);
 }

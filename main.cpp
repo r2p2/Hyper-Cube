@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <signal.h>
 
+#include "Screen.h"
 #include "HyperCube.h"
 
 bool running = true;
@@ -17,7 +18,6 @@ static void onsig(int dummy __attribute__((__unused__)))
 {
 	running = false;
 }
-
 
 int main()
 {
@@ -29,6 +29,7 @@ int main()
 	WINDOW *window = 0;
 	window = initscr();
 
+	Screen s;
 	HyperCube hc;
 
 	while(running) {
@@ -38,16 +39,18 @@ int main()
 
 		hc.move_(0,0,-8);
 
-		hc.render('#');
-		refresh();
-		hc.render(' ');
+		if(s.is_size_changed())
+			s.on_size_changed();
+
+		hc.render(s, '#');
+		s.render();
+		hc.render(s, ' ');
 		move(0,0);
 
 		hc.move_(0,0,8);
 
 		usleep(20000);
 	}
-
 	endwin();
 
 	return 0;
