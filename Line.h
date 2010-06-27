@@ -36,6 +36,10 @@ public:
 	void move_(double x_delta, double y_delta, double z_delta);
 
 	void render(Screen &s, char c);
+
+private:
+	void render_new(Screen &s, char c);
+	void render_cache(Screen &s, char c);
 };
 
 #endif /* LINE_H_ */
