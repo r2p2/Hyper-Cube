@@ -24,18 +24,66 @@ int main()
 	(void)signal(SIGHUP, onsig);
 	(void)signal(SIGINT, onsig);
 	(void)signal(SIGTERM, onsig);
+    
+    int key = 0;
 
+    double def_rot_x = 0.0;
+    double def_rot_y = 0.0;
+    double def_rot_z = 0.0;
+    int def_sleep = 20000;
+
+    double rot_x = def_rot_x;
+    double rot_y = def_rot_y;
+    double rot_z = def_rot_z;
+    int sleep = def_sleep;
 
 	WINDOW *window = 0;
 	window = initscr();
+    wtimeout(window, 0);
 
 	Screen s;
 	HyperCube hc;
 
 	while(running) {
-		hc.rotate_y(0.2);
-		hc.rotate_z(0.3);
-		hc.rotate_x(0.5);
+        key = wgetch(window);
+        switch(key)
+        {
+            case '+':
+                if(sleep-100 > 0)
+                    sleep -= 100;
+                break;
+            case '-':
+                if(sleep+100 > 1000000)
+                    sleep += 100;
+                break;
+            case '6':
+                rot_y += 0.1;
+                break;
+            case '4':
+                rot_y -= 0.1;
+                break;
+            case '8':
+                rot_x += 0.1;
+                break;
+            case '2':
+                rot_x -= 0.1;
+                break;
+            case '5':
+                rot_x = def_rot_x;
+                rot_y = def_rot_y;
+                rot_z = def_rot_z;
+                sleep = def_sleep;
+                break;
+            case 'q':
+                running = false;
+            default:
+                break;
+        }
+
+
+		hc.rotate_y(rot_y);
+		hc.rotate_z(rot_z);
+		hc.rotate_x(rot_x);
 
 		hc.move_(0,0,-8);
 
@@ -49,7 +97,7 @@ int main()
 
 		hc.move_(0,0,8);
 
-		usleep(20000);
+		usleep(sleep);
 	}
 	endwin();
 
