@@ -49,7 +49,7 @@ void Screen::on_size_changed()
 
 void Screen::render()
 {
-	for(int i = 0; i < canvas.size(); i++)
+	for(unsigned int i = 0; i < canvas.size(); i++)
 	{
 		mvaddstr(i,0, canvas[i].c_str());
 	}
