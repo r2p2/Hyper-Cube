@@ -11,13 +11,14 @@
 #include <vector>
 
 #include "Screen.h"
+#include "Object3D.h"
 #include "Point.h"
 
 struct Point2d {
   int x, y;
 };
 
-class Line
+class Line : public Object3D
 {
   std::vector<Point2d> cache;
 

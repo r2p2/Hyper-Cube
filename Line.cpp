@@ -11,11 +11,17 @@
 #include "Line.h"
 
 Line::Line(Point a, Point b)
-:start(a), end(b)
-{}
+:Object3D()
+,start(a)
+,end(b)
+{
+  
+}
 
 Line::~Line()
-{}
+{
+  
+}
 
 int Line::sgn(int x){
   return (x > 0) ? 1 : (x < 0) ? -1 : 0;
