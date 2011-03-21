@@ -11,7 +11,7 @@
 #include <curses.h>
 
 Point::Point(double x, double y, double z)
-:x(x), y(y), z(z)
+:Object3D(x, y, z)
 {
 }
 
@@ -23,8 +23,8 @@ void Point::rotate_x(double angle)
 {
   double rad = angle/180*3.1415926535;
 
-  double _y = std::cos(rad)*y - std::sin(rad)*z;
-  double _z = std::sin(rad)*y + std::cos(rad)*z;
+  double _y = std::cos(rad)*center_y - std::sin(rad)*center_z;
+  double _z = std::sin(rad)*center_y + std::cos(rad)*center_z;
 
   y = _y;
   z = _z;
@@ -34,8 +34,8 @@ void Point::rotate_y(double angle)
 {
   double rad = angle/180*3.1415926535;
 
-  double _x =   std::cos(rad)*x + std::sin(rad)*z;
-  double _z = - std::sin(rad)*x + std::cos(rad)*z;
+  double _x =   std::cos(rad)*center_x + std::sin(rad)*center_z;
+  double _z = - std::sin(rad)*center_x + std::cos(rad)*center_z;
 
   x = _x;
   z = _z;
@@ -45,29 +45,28 @@ void Point::rotate_z(double angle)
 {
   double rad = angle/180*3.1415926535;
 
-  double _x = std::cos(rad)*x - std::sin(rad)*y;
-  double _y = std::sin(rad)*x + std::cos(rad)*y;
+  double _x = std::cos(rad)*center_x - std::sin(rad)*center_y;
+  double _y = std::sin(rad)*center_x + std::cos(rad)*center_y;
 
-  x = _x;
-  y = _y;
+  center_x = _x;
+  center_y = _y;
 }
 
 void Point::move_(double x_delta, double y_delta, double z_delta)
 {
-  x += x_delta;
-  y += y_delta;
-  z += z_delta;
+  center_x += x_delta;
+  center_y += y_delta;
+  center_z += z_delta;
 }
 
 void Point::render(Screen &s, char c)
 {
   s.canvas[screen_y(s)][screen_x(s)] = c;
-  //mvaddch(screen_y(s), , c);
 }
 
 int Point::screen_x(Screen &s)
 {
-  double sx = (x*2)/(0.1-z);
+  double sx = (center_x*2)/(0.1-center_z);
   double width = (double)s.width;
   return (int)(width*sx + width/2);
 }

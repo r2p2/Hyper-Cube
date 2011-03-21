@@ -9,8 +9,9 @@
 #define POINT_H_
 
 #include "Screen.h"
+#include "Object3D.h"
 
-class Point
+class Point : public Object3D
 {
 public:
   Point(double x, double y, double z);
