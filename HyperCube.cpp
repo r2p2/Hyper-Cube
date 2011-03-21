@@ -8,6 +8,7 @@
 #include "HyperCube.h"
 
 HyperCube::HyperCube()
+:Object3D()
 {
   Point *points[8];
   points[0] = new Point(-0.9, -0.9, +0.9);

@@ -9,10 +9,11 @@
 #define HyperCube_H_
 
 #include "Screen.h"
+#include "Object3D.h"
 #include "Line.h"
 #include "Point.h"
 
-class HyperCube
+class HyperCube : public Object3D
 {
   Line *lines[12];
 
