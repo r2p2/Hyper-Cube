@@ -1,13 +1,13 @@
 /*
- * HyperCube.cpp
+ * Cube.cpp
  *
  *  Created on: 01.04.2010
  *      Author: r2p2
  */
 
-#include "HyperCube.h"
+#include "Cube.h"
 
-HyperCube::HyperCube()
+Cube::Cube()
 :Object3D()
 {
   Point *points[8];
@@ -39,7 +39,7 @@ HyperCube::HyperCube()
   }
 }
 
-HyperCube::~HyperCube()
+Cube::~Cube()
 {
   for(int i = 0; i < 12; i++)
   {
@@ -47,7 +47,7 @@ HyperCube::~HyperCube()
   }
 }
 
-void HyperCube::rotate_y(double angle)
+void Cube::rotate_y(double angle)
 {
   for(int i = 0; i < 12; i++)
   {
@@ -55,7 +55,7 @@ void HyperCube::rotate_y(double angle)
   }
 }
 
-void HyperCube::rotate_x(double angle)
+void Cube::rotate_x(double angle)
 {
   for(int i = 0; i < 12; i++)
   {
@@ -63,7 +63,7 @@ void HyperCube::rotate_x(double angle)
   }
 }
 
-void HyperCube::rotate_z(double angle)
+void Cube::rotate_z(double angle)
 {
   for(int i = 0; i < 12; i++)
   {
@@ -71,7 +71,7 @@ void HyperCube::rotate_z(double angle)
   }
 }
 
-void HyperCube::move_(double x_delta, double y_delta, double z_delta)
+void Cube::move_(double x_delta, double y_delta, double z_delta)
 {
   for(int i = 0; i < 12; i++)
   {
@@ -79,7 +79,7 @@ void HyperCube::move_(double x_delta, double y_delta, double z_delta)
   }
 }
 
-void HyperCube::render(Screen &s, char c)
+void Cube::render(Screen &s, char c)
 {
   for(int i = 0; i < 12; i++)
   {

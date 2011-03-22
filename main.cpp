@@ -10,7 +10,7 @@
 #include <signal.h>
 
 #include "Screen.h"
-#include "HyperCube.h"
+#include "Cube.h"
 
 bool running = true;
 
@@ -42,7 +42,7 @@ int main()
   wtimeout(window, 0);
 
   Screen s;
-  HyperCube hc;
+  Cube hc;
 
   while(running) {
     key = wgetch(window);

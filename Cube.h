@@ -1,25 +1,25 @@
 /*
- * HyperCube.h
+ * Cube.h
  *
  *  Created on: 01.04.2010
  *      Author: r2p2
  */
 
-#ifndef HyperCube_H_
-#define HyperCube_H_
+#ifndef Cube_H_
+#define Cube_H_
 
 #include "Screen.h"
 #include "Object3D.h"
 #include "Line.h"
 #include "Point.h"
 
-class HyperCube : public Object3D
+class Cube : public Object3D
 {
   Line *lines[12];
 
 public:
-  HyperCube();
-  virtual ~HyperCube();
+  Cube();
+  virtual ~Cube();
 
   void rotate_x(double angle);
   void rotate_y(double angle);
@@ -29,4 +29,4 @@ public:
   void render(Screen &s, char c);
 };
 
-#endif /* HyperCube_H_ */
+#endif /* Cube_H_ */
