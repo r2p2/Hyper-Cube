@@ -25,8 +25,6 @@ class Line : public Object3D
   Point start;
   Point end;
 
-  int sgn(int);
-
 public:
   Line(Point const &a, Point const &b);
   virtual ~Line();
@@ -41,6 +39,8 @@ public:
 private:
   void render_new(Screen &s, char c);
   void render_cache(Screen &s, char c);
+
+  static int sgn(int);
 };
 
 #endif /* LINE_H_ */
