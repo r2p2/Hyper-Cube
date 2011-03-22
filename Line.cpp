@@ -10,7 +10,7 @@
 
 #include "Line.h"
 
-Line::Line(Point a, Point b)
+Line::Line(Point const &a, Point const &b)
 :Object3D()
 ,start(a)
 ,end(b)

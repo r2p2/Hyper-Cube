@@ -28,7 +28,7 @@ class Line : public Object3D
   int sgn(int);
 
 public:
-  Line(Point a, Point b);
+  Line(Point const &a, Point const &b);
   virtual ~Line();
 
   void rotate_x(double angle);
