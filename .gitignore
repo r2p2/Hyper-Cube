@@ -1,3 +1,4 @@
 hyper-cube
 *.o
 *~
+*.sw[nop]

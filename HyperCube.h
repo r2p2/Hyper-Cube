@@ -1,7 +1,7 @@
 /*
  * HyperCube.h
  *
- *  Created on: 01.04.2010
+ *  Created on: 23.03.2011
  *      Author: r2p2
  */
 
@@ -9,23 +9,26 @@
 #define HyperCube_H_
 
 #include "Screen.h"
-#include "Line.h"
-#include "Point.h"
+#include "Object3D.h"
+#include "Cube.h"
 
 class HyperCube
 {
-  Line *lines[12];
-
+  Screen screen;
+  Object3D *object;
+  
+  bool running;
+  double rot_x;
+  double rot_y;
+  double rot_z;
+  int delay;
+  
 public:
   HyperCube();
   virtual ~HyperCube();
-
-  void rotate_x(double angle);
-  void rotate_y(double angle);
-  void rotate_z(double angle);
-  void move_(double x_delta, double y_delta, double z_delta);
-
-  void render(Screen &s, char c);
+  
+  void loop();
+  void set_default();
 };
 
 #endif /* HyperCube_H_ */

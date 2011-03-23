@@ -10,14 +10,18 @@
 #include <curses.h>
 
 Screen::Screen()
-:width(COLS), height(LINES)
+:window(initscr())
+,width(COLS)
+,height(LINES)
 {
+  wtimeout(window, 0);
   init_canvas();
 }
 
 Screen::~Screen()
 {
   free_canvas();
+  endwin();
 }
 
 void Screen::free_canvas()
@@ -55,3 +59,8 @@ void Screen::render()
   }
   refresh();
 }
+
+int Screen::key_pressed()
+{
+  return wgetch(window);
+} 

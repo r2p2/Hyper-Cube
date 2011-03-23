@@ -11,23 +11,23 @@
 #include <vector>
 
 #include "Screen.h"
+#include "Object3D.h"
 #include "Point.h"
 
-struct Point2d {
-  int x, y;
-};
-
-class Line
+class Line : public Object3D
 {
+  struct Point2d
+  {
+    int x, y;
+  };
+  
   std::vector<Point2d> cache;
 
   Point start;
   Point end;
-
-  int sgn(int);
-
+  
 public:
-  Line(Point a, Point b);
+  Line(Point const &a, Point const &b);
   virtual ~Line();
 
   void rotate_x(double angle);
@@ -40,6 +40,8 @@ public:
 private:
   void render_new(Screen &s, char c);
   void render_cache(Screen &s, char c);
+
+  static int sgn(int);
 };
 
 #endif /* LINE_H_ */

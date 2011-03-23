@@ -1,21 +1,25 @@
 /*
- * Point.h
+ * Cube.h
  *
  *  Created on: 01.04.2010
  *      Author: r2p2
  */
 
-#ifndef POINT_H_
-#define POINT_H_
+#ifndef Cube_H_
+#define Cube_H_
 
 #include "Screen.h"
 #include "Object3D.h"
+#include "Line.h"
+#include "Point.h"
 
-class Point : public Object3D
+class Cube : public Object3D
 {
+  Line *lines[12];
+
 public:
-  Point(double x, double y, double z);
-  virtual ~Point();
+  Cube();
+  virtual ~Cube();
 
   void rotate_x(double angle);
   void rotate_y(double angle);
@@ -23,12 +27,6 @@ public:
   void move_(double x_delta, double y_delta, double z_delta);
 
   void render(Screen &s, char c);
-  int screen_x(Screen &s);
-  int screen_y(Screen &s);
-
-  double x;
-  double y;
-  double z;
 };
 
-#endif /* POINT_H_ */
+#endif /* Cube_H_ */

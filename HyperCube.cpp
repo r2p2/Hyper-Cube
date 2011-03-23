@@ -8,80 +8,81 @@
 #include "HyperCube.h"
 
 HyperCube::HyperCube()
+:screen()
+,object(new Cube())
+,running(false)
+,rot_x(0)
+,rot_y(0)
+,rot_z(0)
+,delay(0)
 {
-  Point *points[8];
-  points[0] = new Point(-0.9, -0.9, +0.9);
-  points[1] = new Point(+0.9, -0.9, +0.9);
-  points[2] = new Point(+0.9, +0.9, +0.9);
-  points[3] = new Point(-0.9, +0.9, +0.9);
-  points[4] = new Point(-0.9, -0.9, -0.9);
-  points[5] = new Point(+0.9, -0.9, -0.9);
-  points[6] = new Point(+0.9, +0.9, -0.9);
-  points[7] = new Point(-0.9, +0.9, -0.9);
-
-  lines[0] = new Line(*points[0], *points[1]);
-  lines[1] = new Line(*points[1], *points[2]);
-  lines[2] = new Line(*points[2], *points[3]);
-  lines[3] = new Line(*points[0], *points[3]);
-  lines[4] = new Line(*points[4], *points[5]);
-  lines[5] = new Line(*points[5], *points[6]);
-  lines[6] = new Line(*points[6], *points[7]);
-  lines[7] = new Line(*points[7], *points[4]);
-  lines[8] = new Line(*points[0], *points[4]);
-  lines[9] = new Line(*points[1], *points[5]);
-  lines[10] = new Line(*points[2], *points[6]);
-  lines[11] = new Line(*points[3], *points[7]);
-
-  for(int i = 0; i < 8; i++)
-  {
-    delete points[i];
-  }
+  set_default();
 }
 
 HyperCube::~HyperCube()
 {
-  for(int i = 0; i < 12; i++)
-  {
-    delete lines[i];
+}
+
+void HyperCube::loop()
+{
+  running = true;
+  
+  while(running) {
+    switch(screen.key_pressed())
+    {
+      case '+':
+        if(delay-100 > 0)
+        delay -= 100;
+        break;
+      case '-':
+        if(delay+100 > 1000000)
+        delay += 100;
+        break;
+      case '6':
+        rot_y += 0.1;
+        break;
+      case '4':
+        rot_y -= 0.1;
+        break;
+      case '8':
+        rot_x += 0.1;
+        break;
+      case '2':
+        rot_x -= 0.1;
+      break;
+        case '5':
+        set_default();
+        break;
+      case 'q':
+        running = false;
+      default:
+         break;
+    }
+
+    object->rotate_y(rot_y);
+    object->rotate_z(rot_z);
+    object->rotate_x(rot_x);
+
+    object->move_(0,0,-8);
+
+    if(screen.is_size_changed())
+      screen.on_size_changed();
+
+    object->render(screen, '#');
+    screen.render();
+    object->render(screen, ' ');
+    move(0,0);
+
+    object->move_(0,0,8);
+
+    usleep(delay);
   }
 }
 
-void HyperCube::rotate_y(double angle)
+void HyperCube::set_default()
 {
-  for(int i = 0; i < 12; i++)
-  {
-    lines[i]->rotate_y(angle);
-  }
-}
-
-void HyperCube::rotate_x(double angle)
-{
-  for(int i = 0; i < 12; i++)
-  {
-    lines[i]->rotate_x(angle);
-  }
-}
-
-void HyperCube::rotate_z(double angle)
-{
-  for(int i = 0; i < 12; i++)
-  {
-    lines[i]->rotate_z(angle);
-  }
-}
-
-void HyperCube::move_(double x_delta, double y_delta, double z_delta)
-{
-  for(int i = 0; i < 12; i++)
-  {
-    lines[i]->move_(x_delta, y_delta, z_delta);
-  }
-}
-
-void HyperCube::render(Screen &s, char c)
-{
-  for(int i = 0; i < 12; i++)
-  {
-    lines[i]->render(s, c);
-  }
+  rot_x = 0;
+  rot_y = 0;
+  rot_z = 0;
+  delay = 20000;
 }
