@@ -11,8 +11,6 @@
 
 #include "HyperCube.h"
 
-bool running = true;
-
 static void onsig(int dummy __attribute__((__unused__)))
 {
   // press q
