@@ -14,17 +14,18 @@
 #include "Object3D.h"
 #include "Point.h"
 
-struct Point2d {
-  int x, y;
-};
-
 class Line : public Object3D
 {
+  struct Point2d
+  {
+    int x, y;
+  };
+  
   std::vector<Point2d> cache;
 
   Point start;
   Point end;
-
+  
 public:
   Line(Point const &a, Point const &b);
   virtual ~Line();
