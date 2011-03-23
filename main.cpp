@@ -37,12 +37,12 @@ int main()
   double rot_z = def_rot_z;
   int sleep = def_sleep;
 
-  WINDOW *window = 0;
+  
   window = initscr();
   wtimeout(window, 0);
 
-  Screen s;
-  Cube hc;
+  
+  
 
   while(running) {
     key = wgetch(window);
