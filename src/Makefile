@@ -1,7 +1,7 @@
 EXEC=hyper-cube
 
 CC=g++
-CFLAGS=-c -Wall
+CFLAGS=-c -O3 -Wall
 LDFLAGS=-lcurses
 SOURCES=$(wildcard *.cpp)
 OBJS=$(SOURCES:.cpp=.o)
