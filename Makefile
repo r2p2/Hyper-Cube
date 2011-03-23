@@ -1,18 +1,5 @@
-EXEC=hyper-cube
-
-CC=g++
-CFLAGS=-c -Wall
-LDFLAGS=-lcurses
-SOURCES=$(wildcard *.cpp)
-OBJS=$(SOURCES:.cpp=.o)
-
-all: $(SOURCES) $(EXEC)
-
-$(EXEC): $(OBJS)
-		$(CC) $(LDFLAGS) $(OBJS) -o $@
-
-.cpp.o:
-		$(CC) $(CFLAGS) $< -o $@
+all:
+	cd src; $(MAKE) $(MFLAGS)
 
 clean:
-		rm -rf *.o $(EXEC)
+	cd src; $(MAKE) clean
