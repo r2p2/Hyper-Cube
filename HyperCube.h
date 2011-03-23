@@ -8,15 +8,12 @@
 #ifndef HyperCube_H_
 #define HyperCube_H_
 
-#include <curses.h>
-
 #include "Screen.h"
 #include "Object3D.h"
 #include "Cube.h"
 
 class HyperCube
 {
-  WINDOW *window;
   Screen screen;
   Object3D *object;
   

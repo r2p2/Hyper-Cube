@@ -8,8 +8,7 @@
 #include "HyperCube.h"
 
 HyperCube::HyperCube()
-:window(initscr())
-,screen()
+:screen()
 ,object(new Cube())
 ,running(false)
 ,rot_x(0)
@@ -17,23 +16,19 @@ HyperCube::HyperCube()
 ,rot_z(0)
 ,delay(0)
 {
-  wtimeout(window, 0);
   set_default();
 }
 
 HyperCube::~HyperCube()
 {
-  endwin();
 }
 
 void HyperCube::loop()
 {
   running = true;
-  int key = 0;
   
   while(running) {
-    key = wgetch(window);
-    switch(key)
+    switch(screen.key_pressed())
     {
       case '+':
         if(delay-100 > 0)
@@ -62,7 +57,7 @@ void HyperCube::loop()
         running = false;
       default:
          break;
-      }
+    }
 
     object->rotate_y(rot_y);
     object->rotate_z(rot_z);
