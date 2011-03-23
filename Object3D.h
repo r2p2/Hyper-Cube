@@ -8,6 +8,8 @@
 #ifndef OBJECT3D_H_
 #define OBJECT3D_H_
 
+#include "Screen.h"
+
 class Object3D
 {
 public:
@@ -18,6 +20,7 @@ public:
   virtual void rotate_y(double angle) = 0;
   virtual void rotate_z(double angle) = 0;
   virtual void move_(double x_delta, double y_delta, double z_delta) = 0;
+  virtual void render(Screen &s, char c) = 0;
 };
 
 #endif

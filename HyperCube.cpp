@@ -8,15 +8,86 @@
 #include "HyperCube.h"
 
 HyperCube::HyperCube()
-:Object3D()
-,window(0)
-,s()
-,object(new HyperCube())
+:window(initscr())
+,screen()
+,object(new Cube())
+,running(false)
+,rot_x(0)
+,rot_y(0)
+,rot_z(0)
+,delay(0)
 {
- 
+  wtimeout(window, 0);
+  set_default();
 }
 
 HyperCube::~HyperCube()
 {
+  endwin();
+}
+
+void HyperCube::loop()
+{
+  running = true;
+  int key = 0;
   
+  while(running) {
+    key = wgetch(window);
+    switch(key)
+    {
+      case '+':
+        if(delay-100 > 0)
+        delay -= 100;
+        break;
+      case '-':
+        if(delay+100 > 1000000)
+        delay += 100;
+        break;
+      case '6':
+        rot_y += 0.1;
+        break;
+      case '4':
+        rot_y -= 0.1;
+        break;
+      case '8':
+        rot_x += 0.1;
+        break;
+      case '2':
+        rot_x -= 0.1;
+      break;
+        case '5':
+        set_default();
+        break;
+      case 'q':
+        running = false;
+      default:
+         break;
+      }
+
+    object->rotate_y(rot_y);
+    object->rotate_z(rot_z);
+    object->rotate_x(rot_x);
+
+    object->move_(0,0,-8);
+
+    if(screen.is_size_changed())
+      screen.on_size_changed();
+
+    object->render(screen, '#');
+    screen.render();
+    object->render(screen, ' ');
+    move(0,0);
+
+    object->move_(0,0,8);
+
+    usleep(delay);
+  }
+}
+
+void HyperCube::set_default()
+{
+  rot_x = 0;
+  rot_y = 0;
+  rot_z = 0;
+  delay = 20000;
 }
