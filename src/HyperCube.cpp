@@ -49,8 +49,14 @@ void HyperCube::loop()
         break;
       case '2':
         rot_x -= 0.1;
-      break;
-        case '5':
+	break;
+      case '1':
+	rot_z -= 0.1;
+	break;
+      case '3':
+	rot_z += 0.1;
+	break;
+      case '5':
         set_default();
         break;
       case 'q':
