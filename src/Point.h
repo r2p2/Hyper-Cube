@@ -1,24 +1,21 @@
 /*
- * HyperCube.h
+ * Point.h
  *
  *  Created on: 01.04.2010
  *      Author: r2p2
  */
 
-#ifndef HyperCube_H_
-#define HyperCube_H_
+#ifndef POINT_H_
+#define POINT_H_
 
 #include "Screen.h"
-#include "Line.h"
-#include "Point.h"
+#include "Object3D.h"
 
-class HyperCube
+class Point : public Object3D
 {
-  Line *lines[12];
-
 public:
-  HyperCube();
-  virtual ~HyperCube();
+  Point(double x, double y, double z);
+  virtual ~Point();
 
   void rotate_x(double angle);
   void rotate_y(double angle);
@@ -26,6 +23,12 @@ public:
   void move_(double x_delta, double y_delta, double z_delta);
 
   void render(Screen &s, char c);
+  int screen_x(Screen &s);
+  int screen_y(Screen &s);
+
+  double x;
+  double y;
+  double z;
 };
 
-#endif /* HyperCube_H_ */
+#endif /* POINT_H_ */

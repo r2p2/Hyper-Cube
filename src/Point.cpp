@@ -11,7 +11,10 @@
 #include <curses.h>
 
 Point::Point(double x, double y, double z)
-:x(x), y(y), z(z)
+:Object3D()
+,x(x)
+,y(y)
+,z(z)
 {
 }
 
@@ -62,7 +65,6 @@ void Point::move_(double x_delta, double y_delta, double z_delta)
 void Point::render(Screen &s, char c)
 {
   s.canvas[screen_y(s)][screen_x(s)] = c;
-  //mvaddch(screen_y(s), , c);
 }
 
 int Point::screen_x(Screen &s)

@@ -10,9 +10,12 @@
 
 #include <vector>
 #include <string>
+#include <curses.h>
 
 class Screen
 {
+  WINDOW *window;
+   
   void init_canvas();
   void free_canvas();
 public:
@@ -22,6 +25,8 @@ public:
   bool is_size_changed();
   void on_size_changed();
   void render();
+  
+  int key_pressed();
 
   int width;
   int height;
