@@ -11,6 +11,7 @@
 #include "Screen.h"
 #include "Object3D.h"
 #include "Cube.h"
+#include "Pyramid.h"
 
 class HyperCube
 {
@@ -29,6 +30,7 @@ public:
   
   void loop();
   void set_default();
+  void set_object(Object3D *new_object);
 };
 
 #endif /* HyperCube_H_ */
