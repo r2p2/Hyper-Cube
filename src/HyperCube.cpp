@@ -22,6 +22,8 @@ HyperCube::HyperCube()
 
 HyperCube::~HyperCube()
 {
+	if(object)
+		delete object;
 }
 
 void HyperCube::loop()
