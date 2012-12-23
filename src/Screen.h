@@ -14,23 +14,23 @@
 
 class Screen
 {
-  WINDOW *window;
-   
-  void init_canvas();
-  void free_canvas();
+    WINDOW* window;
+
+    void init_canvas();
+    void free_canvas();
 public:
-  Screen();
-  virtual ~Screen();
+    Screen();
+    virtual ~Screen();
 
-  bool is_size_changed();
-  void on_size_changed();
-  void render();
-  
-  int key_pressed();
+    bool is_size_changed();
+    void on_size_changed();
+    void render();
 
-  int width;
-  int height;
-  std::vector<std::string> canvas;
+    int key_pressed();
+
+    int width;
+    int height;
+    std::vector<std::string> canvas;
 };
 
 #endif /* SCREEN_H_ */

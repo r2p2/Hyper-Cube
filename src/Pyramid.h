@@ -15,18 +15,18 @@
 
 class Pyramid : public Object3D
 {
-  Line *lines[8];
+    Line* lines[8];
 
 public:
-  Pyramid();
-  virtual ~Pyramid();
+    Pyramid();
+    virtual ~Pyramid();
 
-  void rotate_x(double angle);
-  void rotate_y(double angle);
-  void rotate_z(double angle);
-  void move_(double x_delta, double y_delta, double z_delta);
+    void rotate_x(double angle);
+    void rotate_y(double angle);
+    void rotate_z(double angle);
+    void move_(double x_delta, double y_delta, double z_delta);
 
-  void render(Screen &s, char c);
+    void render(Screen& s, char c);
 };
 
 #endif /* Pyramid_H_ */

@@ -15,22 +15,22 @@
 
 class HyperCube
 {
-  Screen screen;
-  Object3D *object;
-  
-  bool running;
-  double rot_x;
-  double rot_y;
-  double rot_z;
-  int delay;
-  
+    Screen screen;
+    Object3D* object;
+
+    bool running;
+    double rot_x;
+    double rot_y;
+    double rot_z;
+    int delay;
+
 public:
-  HyperCube();
-  virtual ~HyperCube();
-  
-  void loop();
-  void set_default();
-  void set_object(Object3D *new_object);
+    HyperCube();
+    virtual ~HyperCube();
+
+    void loop();
+    void set_default();
+    void set_object(Object3D* new_object);
 };
 
 #endif /* HyperCube_H_ */

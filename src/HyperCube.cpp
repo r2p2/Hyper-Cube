@@ -8,105 +8,109 @@
 #include "HyperCube.h"
 
 HyperCube::HyperCube()
-:screen()
-,object(0)
-,running(false)
-,rot_x(0)
-,rot_y(0)
-,rot_z(0)
-,delay(0)
+    : screen()
+    , object(0)
+    , running(false)
+    , rot_x(0)
+    , rot_y(0)
+    , rot_z(0)
+    , delay(0)
 {
-  set_default();
-  set_object(new Cube());
+    set_default();
+    set_object(new Cube());
 }
 
 HyperCube::~HyperCube()
 {
-	if(object)
-		delete object;
+    if (object)
+        delete object;
 }
 
 void HyperCube::loop()
 {
-  running = true;
-  
-  while(running) {
-    switch(screen.key_pressed())
+    running = true;
+
+    while (running)
     {
-      case '+':
-        if(delay-100 > 0)
-        delay -= 100;
-        break;
-      case '-':
-        if(delay+100 > 1000000)
-        delay += 100;
-        break;
-      case '6':
-        rot_y += 0.1;
-        break;
-      case '4':
-        rot_y -= 0.1;
-        break;
-      case '8':
-        rot_x += 0.1;
-        break;
-      case '2':
-        rot_x -= 0.1;
-	    break;
-      case '1':
-	    rot_z -= 0.1;
-	    break;
-      case '3':
-	    rot_z += 0.1;
-	    break;
-      case '5':
-        set_default();
-        break;
-      case '!':
-        set_object(new Cube());
-        break;
-      case '"':
-        set_object(new Pyramid());
-        break;
-      case 'q':
-        running = false;
-      default:
-         break;
+        switch (screen.key_pressed())
+        {
+        case '+':
+
+            if (delay - 100 > 0)
+                delay -= 100;
+
+            break;
+        case '-':
+
+            if (delay + 100 > 1000000)
+                delay += 100;
+
+            break;
+        case '6':
+            rot_y += 0.1;
+            break;
+        case '4':
+            rot_y -= 0.1;
+            break;
+        case '8':
+            rot_x += 0.1;
+            break;
+        case '2':
+            rot_x -= 0.1;
+            break;
+        case '1':
+            rot_z -= 0.1;
+            break;
+        case '3':
+            rot_z += 0.1;
+            break;
+        case '5':
+            set_default();
+            break;
+        case '!':
+            set_object(new Cube());
+            break;
+        case '"':
+            set_object(new Pyramid());
+            break;
+        case 'q':
+            running = false;
+        default:
+            break;
+        }
+
+        if (object)
+        {
+            object->rotate_y(rot_y);
+            object->rotate_z(rot_z);
+            object->rotate_x(rot_x);
+            object->move_(0, 0, -8);
+
+            if (screen.is_size_changed())
+                screen.on_size_changed();
+
+            object->render(screen, '#');
+            screen.render();
+            object->render(screen, ' ');
+            move(0, 0);
+            object->move_(0, 0, 8);
+        }
+
+        usleep(delay);
     }
-
-    if(object)
-    {
-      object->rotate_y(rot_y);
-      object->rotate_z(rot_z);
-      object->rotate_x(rot_x);
-
-      object->move_(0,0,-8);
-
-      if(screen.is_size_changed())
-        screen.on_size_changed();
-
-      object->render(screen, '#');
-      screen.render();
-      object->render(screen, ' ');
-      move(0,0);
-
-      object->move_(0,0,8);
-    }
-    usleep(delay);
-  }
 }
 
 void HyperCube::set_default()
 {
-  rot_x = 0;
-  rot_y = 0;
-  rot_z = 0;
-  delay = 20000;
+    rot_x = 0;
+    rot_y = 0;
+    rot_z = 0;
+    delay = 20000;
 }
 
-void HyperCube::set_object(Object3D *new_object)
+void HyperCube::set_object(Object3D* new_object)
 {
-    if(object)
+    if (object)
         delete object;
 
     object = new_object;

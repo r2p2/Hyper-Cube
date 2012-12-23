@@ -15,18 +15,18 @@
 
 class Cube : public Object3D
 {
-  Line *lines[12];
+    Line* lines[12];
 
 public:
-  Cube();
-  virtual ~Cube();
+    Cube();
+    virtual ~Cube();
 
-  void rotate_x(double angle);
-  void rotate_y(double angle);
-  void rotate_z(double angle);
-  void move_(double x_delta, double y_delta, double z_delta);
+    void rotate_x(double angle);
+    void rotate_y(double angle);
+    void rotate_z(double angle);
+    void move_(double x_delta, double y_delta, double z_delta);
 
-  void render(Screen &s, char c);
+    void render(Screen& s, char c);
 };
 
 #endif /* Cube_H_ */

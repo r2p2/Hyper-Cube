@@ -16,32 +16,32 @@
 
 class Line : public Object3D
 {
-  struct Point2d
-  {
-    int x, y;
-  };
-  
-  std::vector<Point2d> cache;
+    struct Point2d
+    {
+        int x, y;
+    };
 
-  Point start;
-  Point end;
-  
+    std::vector<Point2d> cache;
+
+    Point start;
+    Point end;
+
 public:
-  Line(Point const &a, Point const &b);
-  virtual ~Line();
+    Line(Point const& a, Point const& b);
+    virtual ~Line();
 
-  void rotate_x(double angle);
-  void rotate_y(double angle);
-  void rotate_z(double angle);
-  void move_(double x_delta, double y_delta, double z_delta);
+    void rotate_x(double angle);
+    void rotate_y(double angle);
+    void rotate_z(double angle);
+    void move_(double x_delta, double y_delta, double z_delta);
 
-  void render(Screen &s, char c);
+    void render(Screen& s, char c);
 
 private:
-  void render_new(Screen &s, char c);
-  void render_cache(Screen &s, char c);
+    void render_new(Screen& s, char c);
+    void render_cache(Screen& s, char c);
 
-  static int sgn(int);
+    static int sgn(int);
 };
 
 #endif /* LINE_H_ */
