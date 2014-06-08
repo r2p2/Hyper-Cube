@@ -3,9 +3,12 @@
 ######################################################################
 
 TEMPLATE = app
+CONFIG = console
 TARGET = bin/hyper-qube
 DEPENDPATH += . src src/r23d
 INCLUDEPATH += . src
+CONFIG += link_pkgconfig
+PKGCONFIG += ncurses
 
 # Input
 HEADERS += src/Cube.h \
