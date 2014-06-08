@@ -12,6 +12,7 @@
 #include "Object3D.h"
 #include "Cube.h"
 #include "Pyramid.h"
+#include <unistd.h>
 
 class HyperCube
 {
