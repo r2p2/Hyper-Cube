@@ -6,6 +6,7 @@
  */
 
 #include "HyperCube.h"
+#include <unistd.h>
 
 HyperCube::HyperCube()
     : screen()
