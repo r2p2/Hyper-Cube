@@ -6,25 +6,24 @@
  */
 
 #include "HyperCube.h"
-#include <unistd.h>
+
+#include "polygon.h"
 
 HyperCube::HyperCube()
-    : screen()
-    , object(0)
-    , running(false)
-    , rot_x(0)
-    , rot_y(0)
-    , rot_z(0)
-    , delay(0)
+: screen()
+, camera(Point(0, 0, -3), Point(0, 0, 1))
+, world()
+, renderer(world)
+, running(false)
+, delay(0)
 {
+    renderer.add_viewport(camera, screen);
+
     set_default();
-    set_object(new Cube());
 }
 
 HyperCube::~HyperCube()
 {
-    if (object)
-        delete object;
 }
 
 void HyperCube::loop()
@@ -48,31 +47,33 @@ void HyperCube::loop()
 
             break;
         case '6':
-            rot_y += 0.1;
+            camera.rotate(0, 1, 0);
             break;
         case '4':
-            rot_y -= 0.1;
+            camera.rotate(0, -1, 0);
             break;
         case '8':
-            rot_x += 0.1;
+            camera.rotate(1, 0, 0);
             break;
         case '2':
-            rot_x -= 0.1;
+            camera.rotate(-1, 0, 0);
             break;
         case '1':
-            rot_z -= 0.1;
+            camera.rotate(0, 0, -1);
             break;
         case '3':
-            rot_z += 0.1;
+            camera.rotate(0, 0, 1);
             break;
         case '5':
             set_default();
             break;
         case '!':
-            set_object(new Cube());
+            //world.clear();
+            //world.add(new Cube());
             break;
         case '"':
-            set_object(new Pyramid());
+            //world.clear();
+            //world.add(new Pyramid());
             break;
         case 'q':
             running = false;
@@ -80,22 +81,13 @@ void HyperCube::loop()
             break;
         }
 
-        if (object)
-        {
-            object->rotate_y(rot_y);
-            object->rotate_z(rot_z);
-            object->rotate_x(rot_x);
-            object->move_(0, 0, -8);
+        if (screen.is_size_changed())
+            screen.on_size_changed();
 
-            if (screen.is_size_changed())
-                screen.on_size_changed();
-
-            object->render(screen, '#');
-            screen.render();
-            object->render(screen, ' ');
-            move(0, 0);
-            object->move_(0, 0, 8);
-        }
+	renderer.render();
+        //object->render(screen, '#');
+        //screen.render();
+        //object->render(screen, ' ');
 
         usleep(delay);
     }
@@ -103,16 +95,8 @@ void HyperCube::loop()
 
 void HyperCube::set_default()
 {
-    rot_x = 0;
-    rot_y = 0;
-    rot_z = 0;
     delay = 20000;
-}
-
-void HyperCube::set_object(Object3D* new_object)
-{
-    if (object)
-        delete object;
-
-    object = new_object;
+    camera.move_to(0.0, 0.0, -2.0);
+    camera.look_at(Point(0.0, 0.0, 0.1));
+    world.add(new Polygon(Point(-1, -1, 0), Point(1, -1, 0), Point(0, 1, 0)));
 }

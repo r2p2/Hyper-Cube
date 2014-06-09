@@ -8,7 +8,6 @@
 #ifndef POINT_H_
 #define POINT_H_
 
-#include "Screen.h"
 #include "Object3D.h"
 
 class Point : public Object3D
@@ -17,18 +16,20 @@ public:
     Point(double x, double y, double z);
     virtual ~Point();
 
-    void rotate_x(double angle);
-    void rotate_y(double angle);
-    void rotate_z(double angle);
-    void move_(double x_delta, double y_delta, double z_delta);
+    double absolute() const;
+    const Point& normalize();
 
-    void render(Screen& s, char c);
-    int screen_x(Screen& s);
-    int screen_y(Screen& s);
+    // Object3D
+    virtual void rotate(double /*x*/, double /*y*/, double /*z*/);
+    virtual void move(double /*x*/, double /*y*/, double /*z*/);
+    virtual void move_to(double /*x*/, double /*y*/, double /*z*/);
 
     double x;
     double y;
     double z;
 };
+
+Point substract(const Point& /*p1*/, const Point& /*p2*/);
+Point cross_product(const Point& /*p1*/, const Point& /*p2*/);
 
 #endif /* POINT_H_ */

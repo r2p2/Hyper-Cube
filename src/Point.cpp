@@ -6,15 +6,15 @@
  */
 
 #include "Point.h"
+#include "matrix.h"
 
 #include <cmath>
 #include <curses.h>
 
 Point::Point(double x, double y, double z)
-    : Object3D()
-    , x(x)
-    , y(y)
-    , z(z)
+: x(x)
+, y(y)
+, z(z)
 {
 }
 
@@ -22,55 +22,61 @@ Point::~Point()
 {
 }
 
-void Point::rotate_x(double angle)
+double Point::absolute() const
 {
-    double rad = angle / 180 * 3.1415926535;
-    double _y = std::cos(rad) * y - std::sin(rad) * z;
-    double _z = std::sin(rad) * y + std::cos(rad) * z;
-    y = _y;
-    z = _z;
+    return sqrt(x*x+y*y+z*z);
 }
 
-void Point::rotate_y(double angle)
+const Point& Point::normalize()
 {
-    double rad = angle / 180 * 3.1415926535;
-    double _x =   std::cos(rad) * x + std::sin(rad) * z;
-    double _z = - std::sin(rad) * x + std::cos(rad) * z;
-    x = _x;
-    z = _z;
+    double abs = absolute();
+    x /= abs;
+    y /= abs;
+    z /= abs;
+    return *this;
 }
 
-void Point::rotate_z(double angle)
+void Point::move(double x, double y, double z)
 {
-    double rad = angle / 180 * 3.1415926535;
-    double _x = std::cos(rad) * x - std::sin(rad) * y;
-    double _y = std::sin(rad) * x + std::cos(rad) * y;
-    x = _x;
-    y = _y;
+	this->x += x;
+	this->y += y;
+	this->z += z;
 }
 
-void Point::move_(double x_delta, double y_delta, double z_delta)
+void Point::move_to(double x, double y, double z)
 {
-    x += x_delta;
-    y += y_delta;
-    z += z_delta;
+	this->x = x;
+	this->y = y;
+	this->z = z;
 }
 
-void Point::render(Screen& s, char c)
+void Point::rotate(double x, double y, double z)
 {
-    s.canvas[screen_y(s)][screen_x(s)] = c;
+	const Matrix rot_x = make_rotation_matrix_x(x);
+	const Matrix rot_y = make_rotation_matrix_y(y);
+	const Matrix rot_z = make_rotation_matrix_z(z);
+
+	Point p(x, y, z);
+	p = multiply(rot_x, p);
+	p = multiply(rot_y, p);
+	p = multiply(rot_z, p);
+
+	// TODO refactoring
+	x = p.x;
+	y = p.y;
+	z = p.z;
 }
 
-int Point::screen_x(Screen& s)
+Point substract(const Point& p1, const Point& p2)
 {
-    double sx = (x * 2) / (0.1 - z);
-    double width = (double)s.width;
-    return (int)(width * sx + width / 2);
+    return Point(p2.x-p1.x, p2.y-p1.y, p2.z-p1.z);
 }
 
-int Point::screen_y(Screen& s)
+Point cross_product(const Point& p1, const Point& p2)
 {
-    double sy = (y * 2) / (0.1 - z);
-    double height = (double)s.height;
-    return (int)(height * sy + height / 2);
+    return Point(
+            p1.y*p2.z - p1.z*p2.y,
+            p1.z*p2.x - p1.x*p2.z,
+            p1.x*p2.y - p1.y*p2.x
+        );
 }

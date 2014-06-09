@@ -8,19 +8,16 @@
 #ifndef OBJECT3D_H_
 #define OBJECT3D_H_
 
-#include "Screen.h"
-
 class Object3D
 {
 public:
-    Object3D();
-    virtual ~Object3D();
+	Object3D();
+	virtual ~Object3D();
 
-    virtual void rotate_x(double angle) = 0;
-    virtual void rotate_y(double angle) = 0;
-    virtual void rotate_z(double angle) = 0;
-    virtual void move_(double x_delta, double y_delta, double z_delta) = 0;
-    virtual void render(Screen& s, char c) = 0;
+	virtual void rotate(double /*x*/, double /*y*/, double /*z*/) = 0;
+	virtual void move(double /*x*/, double /*y*/, double /*z*/) = 0;
+	virtual void move_to(double /*x*/, double /*y*/, double /*z*/) = 0;
+	// virtual void look_at(const Point& /*point*/) = 0; // put into camera
 };
 
 #endif

@@ -11,22 +11,5 @@ CONFIG += link_pkgconfig
 PKGCONFIG += ncurses
 
 # Input
-HEADERS += src/Cube.h \
-           src/HyperCube.h \
-           src/Line.h \
-           src/Object3D.h \
-           src/Point.h \
-           src/Pyramid.h \
-           src/Screen.h \
-           src/r23d/matrix.h \
-           src/r23d/object.h \
-           src/r23d/rotation_matrix.h \
-           src/r23d/vector.h
-SOURCES += src/Cube.cpp \
-           src/HyperCube.cpp \
-           src/Line.cpp \
-           src/main.cpp \
-           src/Object3D.cpp \
-           src/Point.cpp \
-           src/Pyramid.cpp \
-           src/Screen.cpp
+HEADERS += src/*.h
+SOURCES += src/*.cpp

@@ -9,20 +9,20 @@
 #define HyperCube_H_
 
 #include "Screen.h"
-#include "Object3D.h"
-#include "Cube.h"
-#include "Pyramid.h"
+#include "camera.h"
+#include "world.h"
+#include "wire_renderer.h"
+
 #include <unistd.h>
 
 class HyperCube
 {
-    Screen screen;
-    Object3D* object;
+    Screen       screen;
+    Camera       camera;
+    World        world;
+    WireRenderer renderer;
 
     bool running;
-    double rot_x;
-    double rot_y;
-    double rot_z;
     int delay;
 
 public:
@@ -31,7 +31,6 @@ public:
 
     void loop();
     void set_default();
-    void set_object(Object3D* new_object);
 };
 
 #endif /* HyperCube_H_ */
